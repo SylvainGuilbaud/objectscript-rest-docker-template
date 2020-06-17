@@ -24,13 +24,23 @@ RUN \
   do $SYSTEM.OBJ.Load("Installer.cls", "ck") \
   set sc = ##class(App.Installer).setup() \
   zn "%SYS" \
-  write "Create web application ..." \
-  set webName = "/crud" \
-  set webProperties("DispatchClass") = "Sample.PersonREST" \
+  set webName = "/csp/irisapp" \
+  write "Modify "_webName_" web application ...",! \
   set webProperties("NameSpace") = "IRISAPP" \
   set webProperties("Enabled") = 1 \
+  set webProperties("CSPZENEnabled") = 1 \
   set webProperties("AutheEnabled") = 32 \
-  set sc = ##class(Security.Applications).Create(webName, .webProperties) \
+  set webProperties("iKnowEnabled") = 1 \
+  set webProperties("DeepSeeEnabled") = 1 \
+  set sc = ##class(Security.Applications).Modify(webName, .webProperties) \
+  write "Web application "_webName_" has been updated!",!\
+  write "Create web application ..." \
+  set webName = "/crud" \
+  set webRESTProperties("DispatchClass") = "Sample.PersonREST" \
+  set webRESTProperties("NameSpace") = "IRISAPP" \
+  set webRESTProperties("Enabled") = 1 \
+  set webRESTProperties("AutheEnabled") = 32 \
+  set sc = ##class(Security.Applications).Create(webName, .webRESTProperties) \
   write sc \
   write "Web application "_webName_" has been created!"
 
