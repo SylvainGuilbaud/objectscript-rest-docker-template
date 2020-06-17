@@ -5,11 +5,12 @@ XData setup
 {
 <Manifest>
   <Default Name="SourceDir" Value="#{$system.Process.CurrentDirectory()}src"/>
-
-  <Namespace Name="IRISAPP" Code="IRISAPP" Data="IRISAPP" Create="yes" Ensemble="yes">
+   <Default Name="NameSpace" Value="IRISAPP" />
+  <Default Name="app" Value="irisapp" />
+  <Namespace Name="${NameSpace}" Code="${NameSpace}" Data="${NameSpace}" Create="yes" Ensemble="yes">
 
     <Configuration>
-      <Database Name="IRISAPP" Dir="/opt/irisapp/data" Create="yes"/>
+      <Database Name="${NameSpace}" Dir="/opt/${app}/data" Create="yes"/>
     </Configuration>
     <Import File="${SourceDir}" Flags="ck" Recurse="1"/>
     <CSPApplication Url="/csp/${app}" Directory="${cspdir}${app}"  ServeFiles="1" Recurse="1" MatchRoles=":%DB_${NameSpace}" AuthenticationMethods="32"/>
